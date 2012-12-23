@@ -1,0 +1,44 @@
+so-libs
+=======
+Biblioteka do obsługi IPC. 
+Biblioteka powinna być napisana w języku C++ i obsługiwać następujące operacje:
+Potoki nazwane (FIFO):    
+    * tworzenie i usuwanie potoków nazwanych
+    * zapis danych do potoku
+    * odczyt danych z potoku
+Semafory:
+    * tworzenie i podłączanie do zestawu semaforów
+    * operacje wait i signal na wybranym semaforze
+    * usuwanie semaforów
+    * odczyt wartości semafora
+    * inicjalizacja/ustawianie wartości semafora
+Pamięć współdzielona:
+    * tworzenie i podłączanie do pamięci dzielonej
+    * łatwą operację uzyskiwania wskaźnika do bloku pamięci
+    * usuwanie pamięci dzielonej
+Kolejki komunikatow:    
+    * tworznie kolejki komunikatów
+    * usuwanie kolejki komunikatów
+    * wysyłanie komunikatu
+    * odbieranie komunikatu
+=======
+Potoki nazwane (FIFO)
+=======
+Klasa: FIFO
+
+=======
+Semafory
+=======
+Klasa: Semaphore
+
+=======
+Pamięć współdzielona
+=======
+Klasa: SharedMemory
+
+=======
+Kolejki komunikatów
+=======
+Klasa: MessageQueue
+
+
