@@ -11,22 +11,20 @@
 #include <string.h>
 #include <cerrno>
 
-using namespace std;
+using std::string;
 
 class FIFO {
 private:
     int fd;
     string path;
-    int flags;
     mode_t mode;
 public:
-    FIFO(string _path, int _flags, mode_t _mode);    
+    FIFO(string _path, mode_t mode);    
     ~FIFO();    
-   
-    void create();
+    
     void remove();
 
-    void open();
+    void open(int flags);
     void close();
 
     void write(string data, int n);

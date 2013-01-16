@@ -1,23 +1,17 @@
 #include "FIFO.h"
 
-/*
- * TODO konwersja string na char* ...?
- */
+FIFO::FIFO(string _path, mode_t _mode=0644) : 
+    path(_path), mode(_mode), fd(0) {  
 
-FIFO::FIFO(string _path, int _flags, mode_t _mode=0644) : 
-    path(_path), flags(_flags), mode(_mode), fd(0) {       
+    if (mkfifo(path.c_str(), mode) == -1) {
+        perror("mkfifo");
+        exit(1);
+    }     
 }
 
 FIFO::~FIFO() {
     if (fd) {
         close();
-    }
-}
-
-void FIFO::create() {
-    if (mkfifo(path.c_str(), mode) == -1) {
-        perror("mkfifo");
-        exit(1);
     }
 }
 
@@ -28,7 +22,7 @@ void FIFO::remove() {
     }
 }
 
-void FIFO::open() {
+void FIFO::open(int flags) {
     if ((fd = ::open(path.c_str(), flags)) == -1) {
         perror("open");
         exit(3);
@@ -56,25 +50,6 @@ string FIFO::read(int n) {
         perror("read");
         exit(6);
     }
-    return data;
-}
-
-int main() {
- 
-    if (fork() == 0) {
-        sleep(2);
-        FIFO fifo("file", O_RDONLY);
-        fifo.open();
-        cout << fifo.read(6) << endl;
-        fifo.close();
-        fifo.remove();
-    } else {
-        FIFO fifo("file", O_WRONLY);
-        fifo.create();
-        fifo.open();
-        fifo.write("Hello", 6);
-        fifo.close();
-    }
-    return 0;
+    return (string) data;
 }
 
